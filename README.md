@@ -51,6 +51,7 @@ python test.py [--calc_flops] --init_channels=50 --model_path="trained_models/xn
 python test_imagenet.py [--calc_flops] --model_path="trained_models/imagenet.pth.tar"
 ```
 * Expected result: 23.9% top-1 error with 5.2M model parameters, 590M flops and inference time of 10.66ms per sample.
+
 **CIFAR-10 | XNAS-Plain** 
 
 i.e. XNAS cells trained in the same settings as of [DARTS](https://arxiv.org/abs/1806.09055) for another comparison.
