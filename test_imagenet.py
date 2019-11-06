@@ -80,16 +80,13 @@ def main():
         valid_data, batch_size=args.batch_size, shuffle=False, pin_memory=True, num_workers=0)
 
     with torch.no_grad():
-        ts = time.time()
-        val_acc, samples = infer(valid_queue, model, args.report_freq)
-        te = time.time()
-        infer_time_ms = (te - ts) / samples * 1000
+        val_acc, infer_time = infer(valid_queue, model, args.report_freq)
 
     if args.calc_flops:
         logging.info('Validation Accuracy: %.2f%% | Number of parameters: %s | Inference time: %2.2fms | Flops: %s',
-                     val_acc, num_params, infer_time_ms, flops)
+                     val_acc, num_params, infer_time * 1000, flops)
     else:
-        logging.info('Validation Accuracy: %.2f%% | Inference time: %2.2fms', val_acc, infer_time_ms)
+        logging.info('Validation Accuracy: %.2f%% | Inference time: %2.2fms', val_acc, infer_time * 1000)
 
 
 if __name__ == '__main__':

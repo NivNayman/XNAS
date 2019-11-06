@@ -10,6 +10,7 @@ It is able to efficiently design high-performance convolutional architectures fo
   <img src="images/problem_statement.png" alt="problem_statement" width="90%">
   <img src="images/xnas_algo.png" alt="xnas_algo" width="90%">
 </p>
+
 ## Requirements
 ```
 Python >= 3.5.5, PyTorch >= 1.1.0, torchvision >= 0.2.0, CUDA >= 10.0, cuDNN >= 7.5, thop
@@ -32,25 +33,25 @@ We hereby provide the trained models accompanied with the code necessary for rep
 ```
 python test.py [--calc_flops] --init_channels=36 --model_path="trained_models/xnas_small_cifar10.t7"
 ```
-* Expected result: 1.81% test error rate with 3.7M model parameters, 621M flops and inference time of 2.16ms per sample.
+* Expected result: 1.81% test error rate with 3.7M model parameters, 621M flops and inference time of 1.98ms per sample.
 
 **CIFAR-10 | XNAS-Medium**
 ```
 python test.py [--calc_flops] --init_channels=44 --model_path="trained_models/xnas_medium_cifar10.t7"
 ```
-* Expected result: 1.73% test error rate with 5.6M model parameters, 905M flops and inference time of 2.20ms per sample.
+* Expected result: 1.73% test error rate with 5.6M model parameters, 905M flops and inference time of 1.99ms per sample.
 
 **CIFAR-10 | XNAS-Large**
 ```
 python test.py [--calc_flops] --init_channels=50 --model_path="trained_models/xnas_large_cifar10.t7"
 ```
-* Expected result: 1.60% test error rate with 7.2M model parameters, 1.15G flops and inference time of 2.27ms per sample.
+* Expected result: 1.60% test error rate with 7.2M model parameters, 1.15G flops and inference time of 1.94ms per sample.
 
 **ImageNet** 
 ```
 python test_imagenet.py [--calc_flops] --model_path="trained_models/imagenet.pth.tar"
 ```
-* Expected result: 23.9% top-1 error with 5.2M model parameters, 590M flops and inference time of 10.66ms per sample.
+* Expected result: 23.9% top-1 error with 5.2M model parameters, 590M flops and inference time of 1.49ms per sample.
 
 **CIFAR-10 | XNAS-Plain** 
 
@@ -58,7 +59,7 @@ i.e. XNAS cells trained in the same settings as of [DARTS](https://arxiv.org/abs
 ```
 python test.py [--calc_flops] --model_path="trained_models/xnas_plain.t7"
 ```
-* Expected result: 2.48% test error rate with 3.8M model parameters, 621M flops and inference time of 2.18ms per sample.
+* Expected result: 2.48% test error rate with 3.8M model parameters, 621M flops and inference time of 2.01ms per sample.
 
 ## Citation
 If you use any part of this code in your research, please cite our [paper](https://arxiv.org/abs/1806.09055):

@@ -86,16 +86,13 @@ def main():
         test_data, batch_size=args.batch_size, shuffle=False, pin_memory=True, num_workers=0)
 
     with torch.no_grad():
-        ts = time.time()
-        test_acc, samples = infer(test_queue, model, args.report_freq)
-        te = time.time()
-        infer_time_ms = (te - ts) / samples * 1000
+        test_acc, infer_time = infer(test_queue, model, args.report_freq)
 
     if args.calc_flops:
         logging.info('Test Accuracy: %.2f%% | Number of parameters: %s | Inference time: %2.2fms | Flops: %s',
-                     test_acc, num_params, infer_time_ms, flops)
+                     test_acc, num_params, infer_time * 1000, flops)
     else:
-        logging.info('Test Accuracy: %.2f%% | Inference time: %2.2fms', test_acc, infer_time_ms)
+        logging.info('Test Accuracy: %.2f%% | Inference time: %2.2fms', test_acc, infer_time * 1000)
 
 if __name__ == '__main__':
     main()

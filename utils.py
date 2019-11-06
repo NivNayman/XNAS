@@ -45,12 +45,16 @@ def infer(test_queue, model, report_freq=50):
     top5 = AvgrageMeter()
     model.eval()
     samples = 0
+    infer_time = 0
 
     for step, (input, target) in enumerate(test_queue):
         input = Variable(input, requires_grad=False).cuda()
         target = Variable(target, requires_grad=False).cuda(async=True)
 
+        ts = time.time()
         logits = model(input)
+        te = time.time()
+        infer_time += (te - ts)
 
         prec1, prec5 = accuracy(logits, target, topk=(1, 5))
         n = input.size(0)
@@ -62,7 +66,9 @@ def infer(test_queue, model, report_freq=50):
         if step % report_freq == 0:
             logging.info('test %03d %f %f', step, top1.avg, top5.avg)
 
-    return top1.avg, samples
+    infer_time = infer_time / samples
+
+    return top1.avg, infer_time
 
 class Cutout(object):
     def __init__(self, length):
